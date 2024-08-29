@@ -1,7 +1,7 @@
 
 namespace ParkingZoneMinimalApi
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {
@@ -23,6 +23,8 @@ namespace ParkingZoneMinimalApi
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
+
+            app.MapGet("/", () => "Hello World");
 
             app.Run();
         }
