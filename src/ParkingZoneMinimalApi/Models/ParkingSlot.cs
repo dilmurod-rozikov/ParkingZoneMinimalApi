@@ -18,14 +18,6 @@ namespace ParkingZoneMinimalApi.Models
         [ForeignKey(nameof(ParkingZone))]
         public int ParkingZoneId { get; set; }
 
-        [MaxLength(25)]
-        [MinLength(3)]
-        public string Name { get; set; }
-
-        [MaxLength(100)]
-        [MinLength(10)]
-        public string Address { get; set; }
-
         public DateOnly CreatedDate { get; init; } = new DateOnly();
 
         public virtual ICollection<Reservation> Reservations { get; set; }

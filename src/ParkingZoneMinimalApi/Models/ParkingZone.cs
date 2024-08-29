@@ -15,7 +15,7 @@ namespace ParkingZoneMinimalApi.Models
         [MinLength(10)]
         public string Address { get; set; }
 
-        public DateOnly CreatedDate { get; init; }
+        public DateOnly CreatedDate { get; init; } = new DateOnly();
 
         public ICollection<ParkingSlot> ParkingSlots { get; set; }
     }
