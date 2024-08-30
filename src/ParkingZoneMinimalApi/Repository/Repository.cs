@@ -39,6 +39,5 @@ namespace ParkingZoneMinimalApi.Repository
             _context.Set<T>().Remove(entity);
             return await _context.SaveChangesAsync() > 0;
         }
-        }
     }
 }
