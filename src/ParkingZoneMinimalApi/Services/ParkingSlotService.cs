@@ -1,6 +1,6 @@
 ﻿namespace ParkingZoneMinimalApi.Services
 {
-    public class Reservation
+    public class ParkingSlotService
     {
     }
 }

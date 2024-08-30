@@ -1,6 +1,6 @@
 ﻿namespace ParkingZoneMinimalApi.Repository
 {
-    public class ParkingSlot
+    public class ParkingZoneRepo
     {
     }
 }

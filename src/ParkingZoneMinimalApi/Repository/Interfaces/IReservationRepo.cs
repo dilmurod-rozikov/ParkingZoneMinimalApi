@@ -1,6 +1,6 @@
 ﻿namespace ParkingZoneMinimalApi.Repository.Interfaces
 {
-    public interface IParkingZone
+    public interface IReservationRepo
     {
     }
 }

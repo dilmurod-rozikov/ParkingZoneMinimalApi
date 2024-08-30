@@ -1,6 +1,6 @@
 ﻿namespace ParkingZoneMinimalApi.Services.Interfaces
 {
-    public interface IParkingSlot
+    public interface IParkingSlotService
     {
     }
 }

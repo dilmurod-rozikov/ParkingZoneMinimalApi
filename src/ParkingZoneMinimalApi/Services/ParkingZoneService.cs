@@ -1,6 +1,6 @@
 ﻿namespace ParkingZoneMinimalApi.Services
 {
-    public class ParkingZone
+    public class ParkingZoneService
     {
     }
 }
