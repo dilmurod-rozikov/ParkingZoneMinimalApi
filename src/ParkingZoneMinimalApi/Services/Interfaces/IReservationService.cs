@@ -1,6 +1,8 @@
-﻿namespace ParkingZoneMinimalApi.Services.Interfaces
+﻿using ParkingZoneMinimalApi.Models;
+
+namespace ParkingZoneMinimalApi.Services.Interfaces
 {
-    public interface IReservationService
+    public interface IReservationService : IService<Reservation>
     {
     }
 }

@@ -1,6 +1,8 @@
-﻿namespace ParkingZoneMinimalApi.Repository.Interfaces
+﻿using ParkingZoneMinimalApi.Models;
+
+namespace ParkingZoneMinimalApi.Repository.Interfaces
 {
-    public interface IParkingZoneRepo
+    public interface IParkingZoneRepo : IRepository<ParkingZone>
     {
     }
 }

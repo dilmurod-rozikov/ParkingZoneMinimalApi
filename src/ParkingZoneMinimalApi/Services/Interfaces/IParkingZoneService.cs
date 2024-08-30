@@ -1,6 +1,8 @@
-﻿namespace ParkingZoneMinimalApi.Services.Interfaces
+﻿using ParkingZoneMinimalApi.Models;
+
+namespace ParkingZoneMinimalApi.Services.Interfaces
 {
-    public interface IParkingZoneService
+    public interface IParkingZoneService : IService<ParkingZone>
     {
     }
 }
