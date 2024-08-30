@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using ParkingZoneMinimalApi.DataAccess;
+
 namespace ParkingZoneMinimalApi
 {
     public static class Program
@@ -11,7 +14,8 @@ namespace ParkingZoneMinimalApi
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment())
