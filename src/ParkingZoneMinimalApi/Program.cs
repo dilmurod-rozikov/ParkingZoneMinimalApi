@@ -1,6 +1,10 @@
 
 using Microsoft.EntityFrameworkCore;
 using ParkingZoneMinimalApi.DataAccess;
+using ParkingZoneMinimalApi.Repository.Interfaces;
+using ParkingZoneMinimalApi.Repository;
+using ParkingZoneMinimalApi.Services.Interfaces;
+using ParkingZoneMinimalApi.Services;
 
 namespace ParkingZoneMinimalApi
 {
@@ -9,6 +13,9 @@ namespace ParkingZoneMinimalApi
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
 
             builder.Services.AddAuthorization();
 
