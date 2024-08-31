@@ -17,6 +17,15 @@ namespace ParkingZoneMinimalApi
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
 
+            builder.Services.AddScoped<IParkingZoneRepo, ParkingZoneRepo>();
+            builder.Services.AddScoped<IParkingZoneService, ParkingZoneService>();
+
+            builder.Services.AddScoped<IParkingSlotService, ParkingSlotService>();
+            builder.Services.AddScoped<IParkingSlotRepo, ParkingSlotRepo>();
+
+            builder.Services.AddScoped<IReservationService, ReservationService>();
+            builder.Services.AddScoped<IReservationRepo, ReservationRepo>();
+
             builder.Services.AddAuthorization();
 
             builder.Services.AddEndpointsApiExplorer();
