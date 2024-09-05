@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ParkingZoneMinimalApi.DataAccess;
+using ParkingZoneMinimalApi.Models;
 using ParkingZoneMinimalApi.Repository.Interfaces;
 
 namespace ParkingZoneMinimalApi.Repository
@@ -24,7 +25,7 @@ namespace ParkingZoneMinimalApi.Repository
 
         public async Task<bool> Update(T entity)
         {
-            _context.Set<T>().Update(entity);
+            _context.Entry(entity).State = EntityState.Modified;
             return await _context.SaveChangesAsync() > 0;
         }
 
