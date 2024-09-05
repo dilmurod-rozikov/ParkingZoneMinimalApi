@@ -8,12 +8,12 @@ namespace ParkingZoneMinimalApi.Helper
     {
         public MappingProfiles()
         {
-            CreateMap<ParkingZone, ParkingZoneDto>();
-            CreateMap<ParkingZoneDto, ParkingZone>();
-            CreateMap<ParkingSlot, ParkingSlotDto>();
-            CreateMap<ParkingSlotDto, ParkingSlot>();
-            CreateMap<Reservation, ReservationDto>();
-            CreateMap<ReservationDto, Reservation>();
+            CreateMap<ParkingZone, ParkingZoneDto>()
+                .ReverseMap();
+            CreateMap<ParkingSlot, ParkingSlotDto>()
+                .ReverseMap();
+            CreateMap<Reservation, ReservationDto>()
+                .ReverseMap();
         }
     }
 }

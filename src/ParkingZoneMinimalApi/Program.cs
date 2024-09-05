@@ -5,6 +5,8 @@ using ParkingZoneMinimalApi.Repository.Interfaces;
 using ParkingZoneMinimalApi.Repository;
 using ParkingZoneMinimalApi.Services.Interfaces;
 using ParkingZoneMinimalApi.Services;
+using AutoMapper;
+using ParkingZoneMinimalApi.DTOs;
 
 namespace ParkingZoneMinimalApi
 {
@@ -32,6 +34,8 @@ namespace ParkingZoneMinimalApi
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            builder.Services.AddAutoMapper(typeof(Helper.MappingProfiles));
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment())
@@ -44,7 +48,8 @@ namespace ParkingZoneMinimalApi
 
             app.UseAuthorization();
 
-            app.MapGet("/", () => "Hello World");
+            app.MapGet("/parkingzones", async (IParkingZoneService service, IMapper mapper) =>
+                mapper.Map<List<ParkingZoneDto>> (await service.GetAllAsync()));
 
             app.Run();
         }
