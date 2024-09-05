@@ -75,9 +75,31 @@ namespace ParkingZoneMinimalApi
                 catch (DbUpdateException ex)
                 {
                     Console.Error.WriteLine($"Error creating parking zone: {ex.Message}");
-
                     return Results.StatusCode(500);
                 }
+
+                return Results.NoContent();
+            });
+
+            app.MapPatch("parkingzones/{id, dto}", async (int id, ParkingZoneDto dto, IParkingZoneService service, IMapper mapper) =>
+            {
+                if (id != dto.Id || dto is null)
+                    return Results.BadRequest("Ids are not matching...");
+                var zone = await service.GetByIdAsync(id);
+                if (zone == null)
+                    return Results.NotFound();
+
+                try
+                {
+                    await service.UpdateAsync(mapper.Map<ParkingZone>(dto));
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    Console.Error.WriteLine($"Error creating parking zone: {ex.Message}");
+                    return Results.StatusCode(500);
+                }
+
+                return Results.NoContent();
             });
 
             app.Run();
