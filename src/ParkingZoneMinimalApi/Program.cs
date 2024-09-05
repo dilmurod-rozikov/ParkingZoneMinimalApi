@@ -7,7 +7,8 @@ using ParkingZoneMinimalApi.Services.Interfaces;
 using ParkingZoneMinimalApi.Services;
 using AutoMapper;
 using ParkingZoneMinimalApi.DTOs;
-using Microsoft.AspNetCore.Http.HttpResults;
+using ParkingZoneMinimalApi.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ParkingZoneMinimalApi
 {
@@ -52,14 +53,32 @@ namespace ParkingZoneMinimalApi
                 Results.Ok(mapper.Map<List<ParkingZoneDto>> (await service.GetAllAsync())));
 
             app.MapGet("/parkingzones/{id}", async (int id, IParkingZoneService service, IMapper mapper) =>
-                {
-                    var zone = mapper.Map<ParkingZoneDto>(await service.GetByIdAsync(id));
-                    if (zone == null)
-                        return Results.NotFound();
+            {
+                var zone = mapper.Map<ParkingZoneDto>(await service.GetByIdAsync(id));
+                if (zone == null)
+                    return Results.NotFound();
 
-                    return Results.Ok(zone);
+                return Results.Ok(zone);
+            });
+
+            app.MapPost("parkingzones/{dto}", async ([FromBody]ParkingZoneDto dto, IParkingZoneService service, IMapper mapper) =>
+            {
+                if(dto is null)
+                    return Results.BadRequest("Parkingzone data is required");
+
+                try
+                {
+                    var zone = mapper.Map<ParkingZone>(dto);
+                    await service.CreateAsync(zone);
+                    return Results.Created($"/parkingzones/{zone.Id}", zone);
                 }
-            );
+                catch (DbUpdateException ex)
+                {
+                    Console.Error.WriteLine($"Error creating parking zone: {ex.Message}");
+
+                    return Results.StatusCode(500);
+                }
+            });
 
             app.Run();
         }
