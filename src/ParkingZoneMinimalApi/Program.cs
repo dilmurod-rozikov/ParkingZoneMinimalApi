@@ -7,6 +7,7 @@ using ParkingZoneMinimalApi.Services.Interfaces;
 using ParkingZoneMinimalApi.Services;
 using AutoMapper;
 using ParkingZoneMinimalApi.DTOs;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace ParkingZoneMinimalApi
 {
@@ -45,11 +46,20 @@ namespace ParkingZoneMinimalApi
             }
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
 
             app.MapGet("/parkingzones", async (IParkingZoneService service, IMapper mapper) =>
-                mapper.Map<List<ParkingZoneDto>> (await service.GetAllAsync()));
+                Results.Ok(mapper.Map<List<ParkingZoneDto>> (await service.GetAllAsync())));
+
+            app.MapGet("/parkingzones/{id}", async (int id, IParkingZoneService service, IMapper mapper) =>
+                {
+                    var zone = mapper.Map<ParkingZoneDto>(await service.GetByIdAsync(id));
+                    if (zone == null)
+                        return Results.NotFound();
+
+                    return Results.Ok(zone);
+                }
+            );
 
             app.Run();
         }
